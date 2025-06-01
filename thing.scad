@@ -36,20 +36,12 @@ union() {
         // circle bit
         diff(remove="cutout")
         tag("supports") position(TOP+BACK) tube(id=30.45, wall=edge_thickness, h=edge_height, anchor=BACK+BOTTOM) {
-            attach([TOP]) {
-                tag("cutout") back(15) down(1) cuboid(size=[16.5, 10, 10], anchor=BOTTOM);
-            };
-            position(LEFT) right(4) fwd(2) tag("hole")  tube(id=2.7, wall=1, h=edge_height);
-            position(RIGHT) left(4) fwd(2) tag("hole")  tube(id=2.7, wall=1, h=edge_height);
-        };
-        // supports
-        diff(remove="cutout")
-        tag("supports") position(TOP+FRONT) {
-            cuboid(size=[edge_thickness, 25, edge_height], anchor=FRONT+BOTTOM);
-            cuboid(size=[30, edge_thickness, edge_height], anchor=FRONT+BOTTOM)
-                attach([TOP]) {
-                    tag("cutout") xrot(-6) cuboid(size=[40, 5, 1]);
-                };
+            align(TOP,overlap=1) back(14) tag("cutout") cuboid(size=[16.5, 10, 10]);
+            align(LEFT,shiftout=-3,inside=true) fwd(2) tag("hole")  tube(id=2.7, wall=1, h=edge_height);
+            align(RIGHT,shiftout=-3,inside=true) fwd(2) tag("hole")  tube(id=2.7, wall=1, h=edge_height);
+            attach(FRONT,BOTTOM,overlap=0.1) tag("support") cuboid(size=[edge_thickness, edge_height, 25-edge_thickness], anchor=FRONT)
+                align(TOP,overlap=0.1) color("support") cuboid(size=[25, edge_height, edge_thickness], anchor=FRONT)
+                    align(TOP) back(2) tag("cutout") xrot(-100) cuboid(size=[40, 10, 2], anchor=FRONT+BOTTOM);
         };
     };
 };
